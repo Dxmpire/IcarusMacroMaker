@@ -14,3 +14,5 @@ profile system, and runtime engine.
 ## Installation
 Releases > Unzip > Launch EXE
 
+## Discord:
+https://discord.gg/uufJQqJ52
