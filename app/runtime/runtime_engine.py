@@ -3,37 +3,41 @@ import time
 import threading
 from pynput import keyboard, mouse
 
-from app.storage.profile_store import ProfileStore, Profile
+from app.storage.profile_store import ProfileStore
 
 
 class RuntimeEngine:
     def __init__(self, store=None):
-        # MacroStore (optional, but needed for saving macros)
         self.store = store
-
-        # ---------------------------------------------------------
-        # PROFILE SYSTEM
-        # ---------------------------------------------------------
         self.profile_store = ProfileStore()
 
+        # ----------------------------
+        # PROFILES
+        # ----------------------------
         profiles = self.profile_store.load_profiles()
         if not profiles:
-            default = self.profile_store.create_profile("Default")
-            profiles = [default]
+            profiles = [self.profile_store.create_profile("Default")]
 
         self.profiles = profiles
-        self.active_profile = profiles[0]
 
-        # Macros list always mirrors active profile
-        # (MainWindow will populate this)
-        self.macros = self.active_profile.macros
-        
-        # ---------------------------------------------------------
-        # RUNTIME STATE
-        # ---------------------------------------------------------
+        # Each profile only loads the macros listed in its own
+        # macro_files, so macros never leak between profiles.
+        if self.store:
+            for profile in self.profiles:
+                profile.macros = self.store.load_profile_macros(profile.macro_files)
+
+        self.active_profile = profiles[0]
+        self.macros = list(self.active_profile.macros)
+
+        # ----------------------------
+        # INPUT STATE
+        # ----------------------------
         self.key_states = set()
         self.mouse_states = set()
 
+        # ----------------------------
+        # RUNTIME STATE (per macro)
+        # ----------------------------
         self.toggles = {}
         self.macro_state = {}
         self.action_running = {}
@@ -42,16 +46,23 @@ class RuntimeEngine:
         self.mouse_toggle_latch = {}
         self.action_from_key_latch = {}
 
+        # ----------------------------
+        # CONTROL
+        # ----------------------------
         self.running = True
 
         self.keyboard_ctrl = keyboard.Controller()
         self.mouse_ctrl = mouse.Controller()
 
-        # Start listeners
+        # init only once per macro
+        for m in self.macros:
+            self._init_macro(m)
+
+        # listeners
         self._start_keyboard_listener()
         self._start_mouse_listener()
 
-        # Start engine loop
+        # engine loop
         self.thread = threading.Thread(target=self._engine_loop, daemon=True)
         self.thread.start()
 
@@ -59,50 +70,81 @@ class RuntimeEngine:
     # PROFILE MANAGEMENT
     # ============================================================
 
-    def create_profile(self, name):
-        profile = self.profile_store.create_profile(name)
-        self.profiles.append(profile)
-        return profile
-
-    def rename_profile(self, profile, new_name):
-        self.profile_store.rename_profile(profile, new_name)
-
-    def delete_profile(self, profile):
-        self.profile_store.delete_profile(profile)
-        self.profiles.remove(profile)
-
     def get_profiles(self):
         return self.profiles
 
     def set_active_profile(self, profile):
         self.active_profile = profile
-        self.macros = self._load_macros_for_profile(profile)
+        self.macros = list(profile.macros)
 
-        # Rebuild runtime state for macros
-        self._reset_runtime_state()
+        # only init missing macros (NO FULL RESET)
+        for m in self.macros:
+            self._init_macro(m)
 
-    def _load_macros_for_profile(self, profile):
-        if not self.store:
-            return profile.macros
+    # ============================================================
+    # MACRO REGISTRATION (INCREMENTAL)
+    # ============================================================
 
-        macros = []
-        for filename in profile.macro_files:
-            path = os.path.join("app", "storage", "macros", filename)
-            if os.path.exists(path):
-                macro = self.store.load_single_macro(path)
-                macros.append(macro)
-        return macros
+    def register_macro(self, macro):
+        if macro not in self.macros:
+            self.macros.append(macro)
 
-    def _reset_runtime_state(self):
-        self.toggles.clear()
-        self.macro_state.clear()
-        self.action_running.clear()
-        self.toggle_latch.clear()
-        self.mouse_toggle_latch.clear()
-        self.action_from_key_latch.clear()
+        if macro not in self.active_profile.macros:
+            self.active_profile.macros.append(macro)
 
-        for macro in self.macros:
-            self._init_macro_runtime(macro)
+        self.profile_store.add_macro_to_profile(self.active_profile, macro)
+
+        self._init_macro(macro)
+
+    def remove_macro(self, macro):
+        if macro in self.macros:
+            self.macros.remove(macro)
+
+        if macro in self.active_profile.macros:
+            self.active_profile.macros.remove(macro)
+
+        self._cleanup_macro(macro)
+
+        for d in [
+            self.toggles,
+            self.macro_state,
+            self.action_running,
+            self.toggle_latch,
+            self.mouse_toggle_latch,
+            self.action_from_key_latch,
+        ]:
+            d.pop(macro, None)
+
+    def _init_macro(self, macro):
+        if macro in self.macro_state:
+            return
+
+        self.toggles[macro] = False
+        self.macro_state[macro] = {
+            "active": False,
+            "held_keys": set()
+        }
+        self.action_running[macro] = False
+        macro._fire_once = False
+
+    def ensure_macro(self, macro):
+        if macro not in self.macros:
+            self.macros.append(macro)
+        self._init_macro(macro)
+
+    # ============================================================
+    # ENABLE / DISABLE
+    # ============================================================
+
+    def set_macro_enabled(self, macro, enabled):
+        self.ensure_macro(macro)
+        macro.enabled = enabled
+
+        if not enabled:
+            self._cleanup_macro(macro)
+            state = self.macro_state.get(macro)
+            if state:
+                state["active"] = False
 
     # ============================================================
     # INPUT LISTENERS
@@ -121,82 +163,54 @@ class RuntimeEngine:
             except Exception:
                 self.key_states.discard(str(key))
 
-        listener = keyboard.Listener(on_press=on_press, on_release=on_release)
-        listener.daemon = True
-        listener.start()
+        keyboard.Listener(on_press=on_press, on_release=on_release, daemon=True).start()
 
     def _start_mouse_listener(self):
         def on_click(x, y, button, pressed):
+            b = str(button)
             if pressed:
-                self.mouse_states.add(str(button))
+                self.mouse_states.add(b)
             else:
-                self.mouse_states.discard(str(button))
+                self.mouse_states.discard(b)
 
-        listener = mouse.Listener(on_click=on_click)
-        listener.daemon = True
-        listener.start()
+        mouse.Listener(on_click=on_click, daemon=True).start()
 
     # ============================================================
-    # MACRO MANAGEMENT
-    # ============================================================
-
-    def register_macro(self, macro):
-        """Public API used by UI."""
-        self.active_profile.macros.append(macro)
-        self.profile_store.add_macro_to_profile(self.active_profile, macro)
-
-        self._init_macro_runtime(macro)
-
-    def _init_macro_runtime(self, macro):
-        self.toggles[macro] = False
-        self.macro_state[macro] = {"active": False, "held_keys": set()}
-        self.action_running[macro] = False
-        macro._fire_once = False
-
-    def set_macro_enabled(self, macro, enabled):
-        macro.enabled = enabled
-        if not enabled:
-            self._cleanup_macro(macro)
-            self.macro_state[macro]["active"] = False
-
-    # ============================================================
-    # ENGINE LOOP
+    # ENGINE LOOP (OPTIMIZED)
     # ============================================================
 
     def _engine_loop(self):
         while self.running:
-            for macro in list(self.macros):
+            macros = self.macros  # no copy needed unless you modify list during loop
+
+            for macro in macros:
                 if not getattr(macro, "enabled", False):
                     continue
 
-                cond = self._conditions_met(macro)
                 state = self.macro_state.get(macro)
                 if state is None:
-                    continue
+                    self._init_macro(macro)
+                    state = self.macro_state[macro]
 
-                # One-shot trigger
+                cond = self._conditions_met(macro)
+
                 if getattr(macro, "_fire_once", False):
-                    self.action_running[macro] = True
-                    self._execute_actions(macro, state)
-                    self.action_running[macro] = False
+                    self._run_actions(macro, state)
                     macro._fire_once = False
                     continue
 
-                # Continuous execution
                 if cond:
-                    self.action_running[macro] = True
-                    self._execute_actions(macro, state)
-                    self.action_running[macro] = False
                     state["active"] = True
+                    self._run_actions(macro, state)
                 else:
                     if state["active"]:
                         self._cleanup_macro(macro)
                         state["active"] = False
 
-            time.sleep(0.01)
+            time.sleep(0.005)
 
     # ============================================================
-    # CONDITION EVALUATION
+    # CONDITIONS
     # ============================================================
 
     def _conditions_met(self, macro):
@@ -206,156 +220,79 @@ class RuntimeEngine:
         for cond in macro.conditions:
             t = cond["type"]
 
-            # always_on
             if t == "always_on":
                 continue
 
-            # while_key_down
             if t == "while_key_down":
-                key = cond.get("key")
-                if key not in self.key_states:
+                if cond.get("key") not in self.key_states:
                     return False
 
-            # toggle_with_key
             if t == "toggle_with_key":
                 key = cond.get("key")
-                pressed = key in self.key_states
-                latch_key = (macro, key)
-                latch = self.toggle_latch.get(latch_key, False)
+                if not key:
+                    continue
 
-                if pressed and not latch:
-                    self.toggles[macro] = not self.toggles[macro]
-                    self.toggle_latch[latch_key] = True
+                latch = self.toggle_latch.setdefault(macro, False)
 
-                    if not self.toggles[macro]:
-                        if self.macro_state[macro]["active"]:
-                            self._cleanup_macro(macro)
-                            self.macro_state[macro]["active"] = False
-                        return False
+                if key in self.key_states and not latch:
+                    self.toggles[macro] = not self.toggles.get(macro, False)
+                    self.toggle_latch[macro] = True
+                elif key not in self.key_states:
+                    self.toggle_latch[macro] = False
 
-                elif not pressed and latch:
-                    self.toggle_latch[latch_key] = False
-
-                if not self.toggles[macro]:
+                if not self.toggles.get(macro, False):
                     return False
 
-            # while_mouse_down
-            if t == "while_mouse_down":
-                btn = cond.get("button", "Button.left")
-                if btn not in self.mouse_states:
+            if t == "mouse_button":
+                if str(cond.get("button")) not in self.mouse_states:
                     return False
 
-            # toggle_with_mouse
-            if t == "toggle_with_mouse":
-                btn = cond.get("button", "Button.left")
-                pressed = btn in self.mouse_states
-                latch_key = (macro, btn)
-                latch = self.mouse_toggle_latch.get(latch_key, False)
-
-                if pressed and not latch:
-                    self.toggles[macro] = not self.toggles[macro]
-                    self.mouse_toggle_latch[latch_key] = True
-                elif not pressed and latch:
-                    self.mouse_toggle_latch[latch_key] = False
-
-                if not self.toggles[macro]:
-                    return False
-
-            # action_from_key
             if t == "action_from_key":
                 key = cond.get("key")
-                pressed = key in self.key_states
+                if not key:
+                    continue
 
-                latch_key = (macro, key)
-                latch = self.action_from_key_latch.get(latch_key, False)
+                latch = self.action_from_key_latch.setdefault(macro, False)
 
-                if pressed and not latch:
-                    self.action_from_key_latch[latch_key] = True
-
-                    if cond.get("safe_mode", True) and self.action_running.get(macro, False):
-                        self._cleanup_macro(macro)
-                        self.action_running[macro] = False
-
+                if key in self.key_states and not latch:
                     macro._fire_once = True
-
-                elif not pressed and latch:
-                    self.action_from_key_latch[latch_key] = False
-
-                return getattr(macro, "_fire_once", False)
+                    self.action_from_key_latch[macro] = True
+                elif key not in self.key_states:
+                    self.action_from_key_latch[macro] = False
 
         return True
 
     # ============================================================
-    # ACTION EXECUTION
+    # ACTIONS
     # ============================================================
 
-    def _execute_actions(self, macro, state):
+    def _run_actions(self, macro, state):
+        if not hasattr(macro, "steps"):
+            return
+
         for step in macro.steps:
-            t = step.step_type.value
-            p = step.params
+            t = step.get("type")
+            p = step.get("params", {})
 
-            if t == "key_down":
-                key = p.get("key")
-                if key:
-                    self._press_key_down(key)
-                    state["held_keys"].add(key)
+            if t == "press_key":
+                k = p.get("key")
+                if k:
+                    self.keyboard_ctrl.press(k)
+                    state["held_keys"].add(k)
 
-            if t == "key_up":
-                key = p.get("key")
-                if key:
-                    self._press_key_up(key)
-                    state["held_keys"].discard(key)
+            elif t == "release_key":
+                k = p.get("key")
+                if k:
+                    self.keyboard_ctrl.release(k)
+                    state["held_keys"].discard(k)
 
-            if t == "key_press":
-                key = p.get("key")
-                if key:
-                    self._press_key_down(key)
-                    time.sleep(0.01)
-                    self._press_key_up(key)
+            elif t == "delay":
+                time.sleep(p.get("ms", 10) / 1000)
 
-            if t == "delay":
-                ms = p.get("ms", 10)
-                time.sleep(ms / 1000)
-
-            if t == "mouse_click":
-                btn = p.get("button", "left")
-                self._mouse_click(btn)
-
-            if t == "loop":
-                while self._conditions_met(macro):
-                    for inner_step in macro.steps:
-                        inner_t = inner_step.step_type.value
-                        inner_p = inner_step.params
-
-                        if inner_t == "key_down":
-                            key = inner_p.get("key")
-                            if key:
-                                self._press_key_down(key)
-                                state["held_keys"].add(key)
-
-                        if inner_t == "key_up":
-                            key = inner_p.get("key")
-                            if key:
-                                self._press_key_up(key)
-                                state["held_keys"].discard(key)
-
-                        if inner_t == "key_press":
-                            key = inner_p.get("key")
-                            if key:
-                                self._press_key_down(key)
-                                time.sleep(0.01)
-                                self._press_key_up(key)
-
-                        if inner_t == "delay":
-                            ms = inner_p.get("ms", 10)
-                            time.sleep(ms / 1000)
-
-                        if inner_t == "mouse_click":
-                            btn = inner_p.get("button", "left")
-                            self._mouse_click(btn)
-
-                    time.sleep(0.01)
-                return
+            elif t == "mouse_click":
+                btn = mouse.Button.left if p.get("button") == "left" else mouse.Button.right
+                self.mouse_ctrl.press(btn)
+                self.mouse_ctrl.release(btn)
 
     # ============================================================
     # CLEANUP
@@ -366,27 +303,10 @@ class RuntimeEngine:
         if not state:
             return
 
-        for key in list(state["held_keys"]):
-            self._press_key_up(key)
+        for k in list(state["held_keys"]):
+            try:
+                self.keyboard_ctrl.release(k)
+            except:
+                pass
+
         state["held_keys"].clear()
-
-    # ============================================================
-    # LOW LEVEL INPUT
-    # ============================================================
-
-    def _press_key_down(self, key):
-        try:
-            self.keyboard_ctrl.press(key)
-        except Exception:
-            pass
-
-    def _press_key_up(self, key):
-        try:
-            self.keyboard_ctrl.release(key)
-        except Exception:
-            pass
-
-    def _mouse_click(self, button):
-        btn = mouse.Button.left if button == "left" else mouse.Button.right
-        self.mouse_ctrl.press(btn)
-        self.mouse_ctrl.release(btn)

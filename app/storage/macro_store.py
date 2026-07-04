@@ -9,7 +9,7 @@ class MacroStore:
         os.makedirs(MACRO_DIR, exist_ok=True)
 
     # ---------------------------------------------------------
-    # LOAD ONE MACRO (used by RuntimeEngine for profiles)
+    # LOAD ONE MACRO FROM A FULL FILE PATH
     # ---------------------------------------------------------
     def load_single_macro(self, path):
         from app.models.macro import Macro
@@ -18,21 +18,32 @@ class MacroStore:
         with open(path, "r") as f:
             data = json.load(f)
 
-        # Build Macro object manually (no from_dict in your class)
         macro = Macro(data["name"])
         macro.enabled = data.get("enabled", False)
         macro.category = data.get("category", "Uncategorized")
 
-        # Steps
         macro.steps = []
         for s in data.get("steps", []):
             step = Step(StepType(s["type"]), s["params"])
             macro.steps.append(step)
 
-        # Conditions
         macro.conditions = data.get("conditions", [])
 
         return macro
+
+    # ---------------------------------------------------------
+    # LOAD MACROS BELONGING TO ONE PROFILE
+    # ---------------------------------------------------------
+    def load_profile_macros(self, macro_files):
+        macros = []
+
+        for filename in macro_files:
+            path = os.path.join(MACRO_DIR, filename)
+            if not os.path.exists(path):
+                continue
+            macros.append(self.load_single_macro(path))
+
+        return macros
 
     # ---------------------------------------------------------
     # SAVE MACRO

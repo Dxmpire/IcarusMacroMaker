@@ -28,7 +28,7 @@ class ChangeKeyPage(ctk.CTkFrame):
             self.target.params["key"] = key
             self.master.pages["editor"].refresh_actions()
 
-        # IMPORTANT: Unbind so future pages don't capture keys
+        # Unbind immediately so other pages don't also capture keystrokes.
         self.master.unbind("<Key>")
 
         if self.on_back:

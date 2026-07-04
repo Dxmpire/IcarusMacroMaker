@@ -1,6 +1,4 @@
 {
     "name": "Default",
-    "macro_files": [
-        "New Macro.json",
-    ]
+    "macro_files": []
 }

@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from app.ui.rename_profile_overlay import RenameProfileOverlay
 
 
 class ProfilesPage(ctk.CTkFrame):
@@ -28,7 +29,7 @@ class ProfilesPage(ctk.CTkFrame):
             w.destroy()
 
         active = self.engine.active_profile
-        others = [p for p in self.engine.get_profiles() if p != active]
+        others = [p for p in self.engine.profiles if p != active]
 
         # ======================================================
         # ACTIVE PROFILE SECTION
@@ -128,21 +129,14 @@ class ProfilesPage(ctk.CTkFrame):
     # RENAME PROFILE
     # ---------------------------------------------------------
     def rename_profile(self, profile):
-        popup = ctk.CTkToplevel(self)
-        popup.geometry("300x150")
-        popup.title("Rename Profile")
+        def on_save(profile, new_name):
+            self.store.rename_profile(profile, new_name)
+            self.master.update_active_profile_label()
+            self.refresh()
+            self.master.pages["macros"].refresh()
 
-        entry = ctk.CTkEntry(popup)
-        entry.insert(0, profile.name)
-        entry.pack(pady=20)
-
-        def apply():
-            new_name = entry.get().strip()
-            if new_name:
-                self.store.rename_profile(profile, new_name)
-                self.master.update_active_profile_label()
-                self.refresh()
-                self.master.pages["macros"].refresh()
-            popup.destroy()
-
-        ctk.CTkButton(popup, text="Apply", command=apply).pack(pady=10)
+        RenameProfileOverlay(
+            self.winfo_toplevel(),
+            profile,
+            on_save=on_save
+        ).open()

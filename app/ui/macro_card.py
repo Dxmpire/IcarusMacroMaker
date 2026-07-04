@@ -2,123 +2,142 @@ import customtkinter as ctk
 from app.ui.rename_macro_overlay import RenameMacroOverlay
 from app.ui.delete_macro_overlay import DeleteMacroOverlay
 
-class MacroCard(ctk.CTkFrame):
-    def __init__(self, master, macro, on_edit=None, on_refresh=None, on_duplicate=None):
-        super().__init__(master, corner_radius=10)
 
-        self.master = master
+class MacroCard(ctk.CTkFrame):
+    def __init__(
+        self,
+        master,
+        macro,
+        on_edit=None,
+        on_rename=None,
+        on_delete=None,
+        on_duplicate=None,
+        on_toggle=None
+    ):
+        # height=1 + pack_propagate(True) lets the card shrink to fit its
+        # content instead of sitting at CTkFrame's default height of 200.
+        super().__init__(
+            master,
+            corner_radius=14,
+            fg_color="#2A2A2A",
+            border_width=1,
+            border_color="#3A3A3A",
+            height=1
+        )
+        self.pack_propagate(True)
+
         self.macro = macro
         self.on_edit = on_edit
-        self.on_refresh = on_refresh
+        self.on_rename = on_rename
+        self.on_delete = on_delete
         self.on_duplicate = on_duplicate
+        self.on_toggle = on_toggle
 
-        # Macro name
-        name_label = ctk.CTkLabel(self, text=macro.name, font=("Arial", 20, "bold"))
-        name_label.pack(anchor="w", padx=10, pady=5)
+        self.main = ctk.CTkFrame(self, fg_color="transparent")
+        self.main.pack(fill="x", padx=10, pady=10)
 
-        # ⭐ NEW: Category label
-        category_label = ctk.CTkLabel(
-            self,
-            text=f"[{macro.category}]",
-            font=("Arial", 14)
+        self._build_header()
+        self._build_actions()
+
+    def _build_header(self):
+        header = ctk.CTkFrame(self.main, fg_color="transparent")
+        header.pack(fill="x", pady=(0, 10))
+
+        left = ctk.CTkFrame(header, fg_color="transparent")
+        left.pack(side="left", fill="x", expand=True)
+
+        self.dot = ctk.CTkFrame(
+            left,
+            width=8,
+            height=8,
+            corner_radius=4,
+            fg_color="#4CAF50" if self.macro.enabled else "#777777"
         )
-        category_label.pack(anchor="w", padx=10)
+        self.dot.pack(side="left", padx=(0, 8))
 
-        # Status + toggle row
-        row = ctk.CTkFrame(self)
-        row.pack(fill="x", padx=10, pady=5)
+        self.name = ctk.CTkLabel(left, text=self.macro.name, font=("Arial", 15, "bold"))
+        self.name.pack(side="left")
 
-        self.status_label = ctk.CTkLabel(row, text="On" if macro.enabled else "Off", font=("Arial", 14))
-        self.status_label.pack(side="left")
+        self.toggle = ctk.CTkSwitch(
+            header,
+            text="",
+            command=self._toggle,
+            width=40,
+            height=20,
+            progress_color="#4CAF50"
+        )
+        self.toggle.pack(side="right")
 
-        self.toggle = ctk.CTkSwitch(row, text="Enabled", command=self.handle_toggle)
-
-        if macro.enabled:
+        if self.macro.enabled:
             self.toggle.select()
         else:
             self.toggle.deselect()
 
-        self.toggle.pack(side="right")
+    def _build_actions(self):
+        actions = ctk.CTkFrame(self.main, fg_color="transparent")
+        actions.pack(fill="x")
 
-        # Buttons row
-        btn_row = ctk.CTkFrame(self)
-        btn_row.pack(fill="x", padx=10, pady=10)
+        self._btn(actions, "Edit", self._edit).pack(side="left", padx=(0, 6))
+        self._btn(actions, "Rename", self._rename).pack(side="left", padx=6)
+        self._btn(actions, "Duplicate", self._duplicate).pack(side="left", padx=6)
 
-        edit_btn = ctk.CTkButton(btn_row, text="Edit", width=80, command=self.handle_edit)
-        edit_btn.pack(side="left", padx=5)
+        spacer = ctk.CTkFrame(actions, fg_color="transparent")
+        spacer.pack(side="left", expand=True)
 
-        rename_btn = ctk.CTkButton(btn_row, text="Rename", width=80, command=self.handle_rename)
-        rename_btn.pack(side="left", padx=5)
+        self._btn(actions, "Delete", self._delete, danger=True).pack(side="right")
 
-        duplicate_btn = ctk.CTkButton(btn_row, text="Duplicate", width=100, command=self.handle_duplicate)
-        duplicate_btn.pack(side="left", padx=5)
+    def _btn(self, parent, text, cmd, danger=False):
+        return ctk.CTkButton(
+            parent,
+            text=text,
+            width=90,
+            height=28,
+            corner_radius=6,
+            fg_color="#5A1A1A" if danger else "#3A3A3A",
+            hover_color="#7A2222" if danger else "#4A4A4A",
+            command=cmd,
+            font=("Arial", 12)
+        )
 
-        delete_btn = ctk.CTkButton(btn_row, text="Delete", width=80, fg_color="#AA0000", command=self.handle_delete)
-        delete_btn.pack(side="right", padx=5)
+    def update_name(self):
+        self.name.configure(text=self.macro.name)
 
-    # ---------------------------------------------------------
-    # BUTTON HANDLERS
-    # ---------------------------------------------------------
+    def update_enabled(self):
+        self.dot.configure(fg_color="#4CAF50" if self.macro.enabled else "#777777")
 
-    def handle_edit(self):
+        if self.macro.enabled:
+            self.toggle.select()
+        else:
+            self.toggle.deselect()
+
+    def _toggle(self):
+        self.macro.enabled = self.toggle.get() == 1
+        self.update_enabled()
+
+        if self.on_toggle:
+            self.on_toggle(self.macro, self.macro.enabled)
+
+    def _edit(self):
         if self.on_edit:
             self.on_edit(self.macro)
 
-    def handle_toggle(self):
-        root = self.master
-        while not hasattr(root, "engine"):
-            root = root.master
-
-        is_on = self.toggle.get() == 1
-        self.macro.enabled = is_on
-        self.status_label.configure(text="On" if is_on else "Off")
-
-        root.engine.set_macro_enabled(self.macro, is_on)
-        root.store.save_macro(self.macro)
-
-    def handle_rename(self):
+    def _rename(self):
         RenameMacroOverlay(
-            self.master.master,
+            self.winfo_toplevel(),
             self.macro,
-            on_save=self.rename_done,
-            on_cancel=lambda: None
-        ).place(relwidth=1, relheight=1)
+            on_save=lambda m: (
+                self.update_name(),
+                self.on_rename and self.on_rename(m)
+            )
+        ).open()
 
-    def rename_done(self, macro):
-        root = self.master
-        while not hasattr(root, "store"):
-            root = root.master
-
-        root.store.save_macro(macro)
-
-        if self.on_refresh:
-            self.on_refresh()
-
-    # ---------------------------------------------------------
-    # DUPLICATE HANDLER
-    # ---------------------------------------------------------
-    def handle_duplicate(self):
+    def _duplicate(self):
         if self.on_duplicate:
             self.on_duplicate(self.macro)
 
-    # ---------------------------------------------------------
-    # DELETE HANDLER
-    # ---------------------------------------------------------
-    def handle_delete(self):
+    def _delete(self):
         DeleteMacroOverlay(
-            self.master.master,
+            self.winfo_toplevel(),
             self.macro,
-            on_delete=self.delete_done,
-            on_cancel=lambda: None
-        ).place(relwidth=1, relheight=1)
-
-    def delete_done(self, macro):
-        root = self.master
-        while not hasattr(root, "store"):
-            root = root.master
-
-        root.store.delete_macro(macro)
-        root.engine.macros.remove(macro)
-
-        if self.on_refresh:
-            self.on_refresh()
+            on_delete=lambda m: self.on_delete and self.on_delete(m)
+        ).open()

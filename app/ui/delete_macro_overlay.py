@@ -1,37 +1,24 @@
 import customtkinter as ctk
+from app.ui.overlay import Overlay
 
-class DeleteMacroOverlay(ctk.CTkFrame):
-    def __init__(self, master, macro, on_delete=None, on_cancel=None):
-        super().__init__(master, fg_color="#000000")
+
+class DeleteMacroOverlay(Overlay):
+    def __init__(self, root, macro, on_delete=None, on_cancel=None):
+        super().__init__(root, on_close=on_cancel)
 
         self.macro = macro
         self.on_delete = on_delete
-        self.on_cancel = on_cancel
 
-        panel = ctk.CTkFrame(self, corner_radius=12)
-        panel.place(relx=0.5, rely=0.5, anchor="center")
+        ctk.CTkLabel(self.panel, text="Delete Macro?", font=("Arial", 24, "bold")).pack(pady=(20, 10), padx=20)
+        ctk.CTkLabel(self.panel, text="This cannot be undone.", font=("Arial", 16)).pack(pady=10, padx=20)
 
-        title = ctk.CTkLabel(panel, text="Delete Macro?", font=("Arial", 24, "bold"))
-        title.pack(pady=20)
+        btn_row = ctk.CTkFrame(self.panel, fg_color="transparent")
+        btn_row.pack(pady=20, padx=20)
 
-        msg = ctk.CTkLabel(panel, text="This cannot be undone.", font=("Arial", 16))
-        msg.pack(pady=10)
-
-        btn_row = ctk.CTkFrame(panel)
-        btn_row.pack(pady=20)
-
-        delete_btn = ctk.CTkButton(btn_row, text="Delete", width=100, fg_color="#AA0000", command=self.delete)
-        delete_btn.pack(side="left", padx=10)
-
-        cancel_btn = ctk.CTkButton(btn_row, text="Cancel", width=100, fg_color="#444444", command=self.cancel)
-        cancel_btn.pack(side="right", padx=10)
+        ctk.CTkButton(btn_row, text="Delete", width=100, fg_color="#AA0000", command=self.delete).pack(side="left", padx=10)
+        ctk.CTkButton(btn_row, text="Cancel", width=100, fg_color="#444444", command=self.close).pack(side="right", padx=10)
 
     def delete(self):
         if self.on_delete:
             self.on_delete(self.macro)
-        self.destroy()
-
-    def cancel(self):
-        if self.on_cancel:
-            self.on_cancel()
         self.destroy()

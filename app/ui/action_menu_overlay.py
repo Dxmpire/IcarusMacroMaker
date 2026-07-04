@@ -1,45 +1,32 @@
 import customtkinter as ctk
+from app.ui.overlay import Overlay
 
-class ActionMenuOverlay(ctk.CTkFrame):
-    def __init__(self, master, on_select=None, on_cancel=None):
-        # Solid dark overlay (no alpha allowed in Tk)
-        super().__init__(master, fg_color="#000000")  
+ACTION_TYPES = [
+    ("Press Key", "key_press"),
+    ("Key Down", "key_down"),
+    ("Key Up", "key_up"),
+    ("Delay", "delay"),
+    ("Mouse Click", "mouse_click"),
+]
+
+
+class ActionMenuOverlay(Overlay):
+    def __init__(self, root, on_select=None, on_cancel=None):
+        super().__init__(root, on_close=on_cancel)
 
         self.on_select = on_select
-        self.on_cancel = on_cancel
 
-        # Center panel
-        panel = ctk.CTkFrame(self, corner_radius=12)
-        panel.place(relx=0.5, rely=0.5, anchor="center")
+        ctk.CTkLabel(self.panel, text="Select Action Type", font=("Arial", 24, "bold")).pack(pady=(20, 10), padx=20)
 
-        title = ctk.CTkLabel(panel, text="Select Action Type", font=("Arial", 24, "bold"))
-        title.pack(pady=20)
+        for label, action_type in ACTION_TYPES:
+            ctk.CTkButton(
+                self.panel, text=label, width=200,
+                command=lambda a=action_type: self.select(a)
+            ).pack(pady=5, padx=20)
 
-        # Action buttons
-        actions = [
-            ("Press Key", "key_press"),
-            ("Key Down", "key_down"),
-            ("Key Up", "key_up"),
-            ("Delay", "delay"),
-            ("Mouse Click", "mouse_click")
-        ]
-
-        for label, action_type in actions:
-            btn = ctk.CTkButton(panel, text=label, width=200,
-                                command=lambda a=action_type: self.select(a))
-            btn.pack(pady=5)
-
-        # Cancel button
-        cancel_btn = ctk.CTkButton(panel, text="Cancel", fg_color="#444444",
-                                   command=self.cancel)
-        cancel_btn.pack(pady=20)
+        ctk.CTkButton(self.panel, text="Cancel", fg_color="#444444", command=self.close).pack(pady=(15, 20), padx=20)
 
     def select(self, action_type):
         if self.on_select:
             self.on_select(action_type)
-        self.destroy()
-
-    def cancel(self):
-        if self.on_cancel:
-            self.on_cancel()
         self.destroy()
