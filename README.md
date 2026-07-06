@@ -12,7 +12,7 @@ profile system, and runtime engine.
 - Fully open-source
 
 ## Installation
-Releases > Unzip > Launch EXE
+Releases > Unzip > Launch EXE as administrator
 
 ## Discord:
 https://discord.gg/uufJQqJ52
