@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Icarus Macro Maker changelog – version history and release notes." />
+  <title>Changelog – Icarus Macro Maker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon" aria-hidden="true">⚡</div>
+      Icarus Macro Maker
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="guide.html">Guide</a></li>
+      <li><a href="changelog.html">Changelog</a></li>
+      <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="index.html#downloads" class="nav__cta">Download</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="page-header" aria-labelledby="page-title">
+  <p class="section__eyebrow">Release History</p>
+  <h1 class="page-header__title" id="page-title">Changelog</h1>
+  <p class="page-header__desc">Every release, what changed, and what was fixed.</p>
+</header>
+
+<section class="section" aria-label="Changelog">
+  <div class="container">
+    <div class="changelog">
+
+      <!-- v1.0 -->
+      <div class="cl-version">
+        <div class="cl-version__header">
+          <span class="cl-version__tag">v1.0.0</span>
+          <span class="cl-version__date">July 2025</span>
+          <span class="badge badge--latest">Latest</span>
+        </div>
+        <div class="cl-version__body">
+          <div class="cl-group">
+            <div class="cl-group__label">New Features</div>
+            <div class="cl-group__items">
+              <div class="cl-item">Drag-and-drop action reordering with floating ghost card and drop indicator line</div>
+              <div class="cl-item">Pixel Color Match condition (replaces "On Pixel Change") with improved label clarity</div>
+              <div class="cl-item">Reactions page poll interval changed from free-entry to dropdown (1, 2, 3, 4, 5, 10, 20 ms)</div>
+              <div class="cl-item">Action labels renamed: Move Mouse (Position), Move Mouse (Location)</div>
+              <div class="cl-item">OR / Alt condition groups — one macro, multiple independent triggers</div>
+              <div class="cl-item">Per-macro toggle bind hotkey</div>
+              <div class="cl-item">Per-macro window focus lock</div>
+              <div class="cl-item">Macro categories: Combat, Utility, Movement, Crafting, System, Uncategorized</div>
+              <div class="cl-item">HUD fully configurable — opacity, border, click-through, per-panel toggles, custom size</div>
+              <div class="cl-item">Multi-monitor support across all pixel watch and mouse move features</div>
+              <div class="cl-item">Import / Export macros as portable JSON files</div>
+              <div class="cl-item">XInput and DualShock controller input backend</div>
+            </div>
+          </div>
+          <div class="cl-group">
+            <div class="cl-group__label">Improvements</div>
+            <div class="cl-group__items">
+              <div class="cl-item">Widget cache system — macro editor reuses widgets instead of rebuilding on every refresh</div>
+              <div class="cl-item">Runtime duration display updates live in the action editor</div>
+              <div class="cl-item">Random delay range (min/max) for human-like timing</div>
+              <div class="cl-item">Humanized mouse movement with path randomness, speed variance, and overshoot</div>
+              <div class="cl-item">Type Phrase instant mode for speed-critical scenarios</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v0.9 -->
+      <div class="cl-version">
+        <div class="cl-version__header">
+          <span class="cl-version__tag">v0.9.0</span>
+          <span class="cl-version__date">Placeholder – 2025</span>
+          <span class="badge badge--old">Previous</span>
+        </div>
+        <div class="cl-version__body">
+          <div class="cl-group">
+            <div class="cl-group__label">New Features</div>
+            <div class="cl-group__items">
+              <div class="cl-item">Initial Reactive Macros page with pixel watcher</div>
+              <div class="cl-item">Profile management with enable/disable hotkeys</div>
+              <div class="cl-item">HUD overlay with basic panel support</div>
+              <div class="cl-item">Mouse movement actions with animation support</div>
+              <div class="cl-item">Type Phrase action with speed presets</div>
+            </div>
+          </div>
+          <div class="cl-group">
+            <div class="cl-group__label">Bug Fixes</div>
+            <div class="cl-group__items">
+              <div class="cl-item">Fixed drag-and-drop direction being limited to ±1 step at a time</div>
+              <div class="cl-item">Fixed widget state going stale after editing a step without rebuilding</div>
+              <div class="cl-item">Fixed scroll container coordinate offset in drop calculations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v0.5 -->
+      <div class="cl-version">
+        <div class="cl-version__header">
+          <span class="cl-version__tag">v0.5.0</span>
+          <span class="cl-version__date">Placeholder – 2025</span>
+          <span class="badge badge--old">Previous</span>
+        </div>
+        <div class="cl-version__body">
+          <div class="cl-group">
+            <div class="cl-group__label">New Features</div>
+            <div class="cl-group__items">
+              <div class="cl-item">Core macro engine with keyboard and mouse input</div>
+              <div class="cl-item">Conditions: Always On, While Key Held, Toggle With Key, Action From Key</div>
+              <div class="cl-item">Actions: Key Press, Key Down, Key Up, Mouse Click, Delay, Loop</div>
+              <div class="cl-item">Basic macro list and editor UI</div>
+              <div class="cl-item">JSON-based storage for macros, profiles, and settings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:40px;text-align:center;">
+      <a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker/releases" target="_blank" rel="noopener" class="btn btn-outline">
+        View all releases on GitHub →
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="nav__logo"><div class="nav__logo-icon" aria-hidden="true">⚡</div>Icarus Macro Maker</div>
+      <p>A free, open-source macro automation tool for Windows. Built with Python and CustomTkinter.</p>
+    </div>
+    <div>
+      <div class="footer__col-title">Pages</div>
+      <ul class="footer__links">
+        <li><a href="index.html">Home</a></li><li><a href="features.html">Features</a></li>
+        <li><a href="guide.html">Guide</a></li><li><a href="changelog.html">Changelog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Download</div>
+      <ul class="footer__links">
+        <li><a href="releases/IcarusMacroMaker_v1.0.zip" download>v1.0 ZIP</a></li>
+        <li><a href="releases/IcarusMacroMaker_SampleMacros.json" download>Sample Macros</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Links</div>
+      <ul class="footer__links">
+        <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_1" target="_blank" rel="noopener">Tutorial Video</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_2" target="_blank" rel="noopener">Showcase Video</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2025 YOUR_NAME. Released under the MIT License.</span>
+    <span>Made with Python &amp; CustomTkinter</span>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

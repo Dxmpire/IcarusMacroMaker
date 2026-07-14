@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Quick start guide for Icarus Macro Maker – install, create macros, set conditions, and configure the HUD." />
+  <title>Guide – Icarus Macro Maker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon" aria-hidden="true">⚡</div>
+      Icarus Macro Maker
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="guide.html">Guide</a></li>
+      <li><a href="changelog.html">Changelog</a></li>
+      <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="index.html#downloads" class="nav__cta">Download</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="page-header" aria-labelledby="page-title">
+  <p class="section__eyebrow">Documentation</p>
+  <h1 class="page-header__title" id="page-title">Quick Start Guide</h1>
+  <p class="page-header__desc">From zero to your first working macro in a few minutes.</p>
+</header>
+
+<section class="section" aria-labelledby="install-title">
+  <div class="container">
+    <h2 class="section__title" id="install-title" style="margin-bottom:28px;">1 — Installation</h2>
+
+    <div class="alert alert--info" role="note">
+      <span aria-hidden="true">ℹ️</span>
+      <span>Icarus Macro Maker requires <strong>Python 3.9 or newer</strong> on Windows 10/11.
+      If you don't have Python, download it from
+      <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>
+      and make sure to check <em>"Add Python to PATH"</em> during installation.</span>
+    </div>
+
+    <div class="steps mt-md">
+      <div class="step">
+        <div class="step__num" aria-hidden="true">1</div>
+        <div class="step__body">
+          <div class="step__title">Download the ZIP</div>
+          <p class="step__desc">Grab the latest release from the <a href="index.html#downloads">downloads page</a> or directly from <a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker/releases" target="_blank" rel="noopener">GitHub Releases</a>. Extract it to a folder of your choice.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">2</div>
+        <div class="step__body">
+          <div class="step__title">Install dependencies</div>
+          <p class="step__desc">Open a terminal inside the extracted folder and run:</p>
+          <div class="step__code">pip install -r requirements.txt</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">3</div>
+        <div class="step__body">
+          <div class="step__title">Launch the app</div>
+          <p class="step__desc">Run the main entry point:</p>
+          <div class="step__code">python main.py</div>
+          <p class="step__desc" style="margin-top:8px;">The Icarus Macro Maker window will open along with the HUD overlay.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section class="section section--alt" aria-labelledby="first-macro-title">
+  <div class="container">
+    <h2 class="section__title" id="first-macro-title" style="margin-bottom:28px;">2 — Create your first macro</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step__num" aria-hidden="true">1</div>
+        <div class="step__body">
+          <div class="step__title">Open the Macros page</div>
+          <p class="step__desc">Click <strong>Macros</strong> in the sidebar. You'll see the macro list for your active profile (Default by default).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">2</div>
+        <div class="step__body">
+          <div class="step__title">Create a new macro</div>
+          <p class="step__desc">Click <strong>+ New Macro</strong>. Give it a name and choose a category. The editor opens automatically.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">3</div>
+        <div class="step__body">
+          <div class="step__title">Add a condition</div>
+          <p class="step__desc">Click <strong>+ Add Condition</strong> and choose how the macro triggers — for example, <em>Action From Key</em>. Then click <strong>Set Key</strong> on the condition to bind it to a key or button.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">4</div>
+        <div class="step__body">
+          <div class="step__title">Add actions</div>
+          <p class="step__desc">Click <strong>+ Add Action</strong> and pick an action type. Add as many as you need — key presses, delays, mouse moves, typed text. Drag rows to reorder them.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">5</div>
+        <div class="step__body">
+          <div class="step__title">Save and test</div>
+          <p class="step__desc">Click <strong>Save</strong>. Make sure the macro is enabled (toggle in the macro list). Press your trigger key — the macro runs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section class="section" aria-labelledby="reactive-title">
+  <div class="container">
+    <h2 class="section__title" id="reactive-title" style="margin-bottom:16px;">3 — Pixel Color Match (Reactive macros)</h2>
+    <p style="color:var(--text-muted);margin-bottom:28px;max-width:640px;">
+      Reactive macros fire automatically when a pixel on screen matches a color — no key press needed.
+      They live on the <strong>Reactions</strong> page in the sidebar.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <div class="step__num" aria-hidden="true">1</div>
+        <div class="step__body">
+          <div class="step__title">Go to the Reactions page</div>
+          <p class="step__desc">Click <strong>Reactions</strong> in the sidebar. Click <strong>+ New Macro</strong>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">2</div>
+        <div class="step__body">
+          <div class="step__title">Set the Pixel Color Match condition</div>
+          <p class="step__desc">The condition is added automatically. Click <strong>Edit</strong> on it to open the pixel editor. Click anywhere on screen to set the watch coordinate, or type exact X/Y values. Use the eyedropper to capture the target color.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">3</div>
+        <div class="step__body">
+          <div class="step__title">Configure tolerance and radius</div>
+          <p class="step__desc">Tolerance controls how closely the color must match (0 = exact). Radius watches a circular area of nearby pixels instead of a single point, useful for anti-aliased edges.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num" aria-hidden="true">4</div>
+        <div class="step__body">
+          <div class="step__title">Set the poll interval</div>
+          <p class="step__desc">In the Reactions page header, use the <em>Check every</em> dropdown to set how often the pixel is sampled (1–20 ms). Lower = more responsive, higher = lower CPU use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section class="section section--alt" aria-labelledby="hud-guide-title">
+  <div class="container">
+    <h2 class="section__title" id="hud-guide-title" style="margin-bottom:16px;">4 — Configuring the HUD</h2>
+    <p style="color:var(--text-muted);margin-bottom:28px;max-width:640px;">The HUD is a floating overlay that stays on top of other windows. Customize it from the <strong>Settings</strong> page.</p>
+    <div class="cards">
+      <div class="card">
+        <h3 class="card__title">Position &amp; Size</h3>
+        <p class="card__body">Choose a corner (Top Left, Top Right, Bottom Left, Bottom Right), the display to show it on, and custom width/height values.</p>
+      </div>
+      <div class="card">
+        <h3 class="card__title">Opacity &amp; Border</h3>
+        <p class="card__body">Drag the opacity slider to make the HUD as subtle or bold as you need. Toggle the border on or off.</p>
+      </div>
+      <div class="card">
+        <h3 class="card__title">Click-Through</h3>
+        <p class="card__body">Enable click-through mode so mouse clicks pass through the HUD to whatever is behind it — essential for gaming overlays.</p>
+      </div>
+      <div class="card">
+        <h3 class="card__title">Panel Toggles</h3>
+        <p class="card__body">Toggle each HUD panel individually: title, profile name, clock, uptime, macro summary, macro list, run counts, pixel watch status, controller state.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section class="section" aria-labelledby="tips-title">
+  <div class="container">
+    <h2 class="section__title" id="tips-title" style="margin-bottom:24px;">Tips &amp; common questions</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:720px;">
+
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">My macro fires too slowly — how do I speed it up?</h3>
+        <p class="text-muted" style="font-size:0.93rem;">Replace Delay steps with shorter values or remove them entirely. For Type Phrase, switch to the <em>Fastest</em> preset or enable <em>Instant</em> mode.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Can I run multiple macros at the same time?</h3>
+        <p class="text-muted" style="font-size:0.93rem;">Yes. All enabled macros in the active profile are monitored simultaneously. Their conditions are evaluated independently.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">How do I import a macro someone shared with me?</h3>
+        <p class="text-muted" style="font-size:0.93rem;">On the Macros page, click <strong>Import Macro</strong> and select the <code>.json</code> file. It is added to your current profile immediately.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">The pixel watcher is using a lot of CPU.</h3>
+        <p class="text-muted" style="font-size:0.93rem;">Increase the poll interval on the Reactions page. A value of 5–10 ms is a good balance between responsiveness and CPU cost.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Where are my macros and settings saved?</h3>
+        <p class="text-muted" style="font-size:0.93rem;">Everything is stored in <code>app/storage/</code> as JSON files. Back up that folder to preserve your profiles and macros.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="nav__logo"><div class="nav__logo-icon" aria-hidden="true">⚡</div>Icarus Macro Maker</div>
+      <p>A free, open-source macro automation tool for Windows. Built with Python and CustomTkinter.</p>
+    </div>
+    <div>
+      <div class="footer__col-title">Pages</div>
+      <ul class="footer__links">
+        <li><a href="index.html">Home</a></li><li><a href="features.html">Features</a></li>
+        <li><a href="guide.html">Guide</a></li><li><a href="changelog.html">Changelog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Download</div>
+      <ul class="footer__links">
+        <li><a href="releases/IcarusMacroMaker_v1.0.zip" download>v1.0 ZIP</a></li>
+        <li><a href="releases/IcarusMacroMaker_SampleMacros.json" download>Sample Macros</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Links</div>
+      <ul class="footer__links">
+        <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_1" target="_blank" rel="noopener">Tutorial Video</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_2" target="_blank" rel="noopener">Showcase Video</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2025 YOUR_NAME. Released under the MIT License.</span>
+    <span>Made with Python &amp; CustomTkinter</span>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Icarus Macro Maker – a powerful, free macro automation tool for keyboard, mouse, and controller input on Windows." />
+  <title>Icarus Macro Maker</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Icarus Macro Maker home">
+      <div class="nav__logo-icon" aria-hidden="true">⚡</div>
+      Icarus Macro Maker
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="guide.html">Guide</a></li>
+      <li><a href="changelog.html">Changelog</a></li>
+      <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#downloads" class="nav__cta">Download</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero__badge">Free &amp; Open Source</div>
+    <h1 class="hero__title" id="hero-title">
+      Macro automation<br>done <span>right</span>
+    </h1>
+    <p class="hero__sub">
+      Icarus Macro Maker is a free Windows automation tool supporting keyboard,
+      mouse, and controller input — with a clean GUI, reactive pixel-based
+      triggers, full profile management, and a customizable HUD.
+    </p>
+    <div class="hero__actions">
+      <a href="#downloads" class="btn btn-primary">
+        <!-- download icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Free
+      </a>
+      <a href="features.html" class="btn btn-secondary">Explore Features</a>
+      <a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener" class="btn btn-outline">
+        <!-- github icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats bar ───────────────────────────────────────────── -->
+<div class="section section--alt" aria-label="Project stats">
+  <div class="container">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__num" data-count="9" data-suffix="">9</div>
+        <div class="stat__label">Action Types</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num" data-count="5" data-suffix="">5</div>
+        <div class="stat__label">Condition Types</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num" data-count="100" data-suffix="%">100%</div>
+        <div class="stat__label">Free &amp; Open Source</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num" data-count="0" data-suffix="">0</div>
+        <div class="stat__label">Dependencies to Buy</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num" data-count="3" data-suffix="">3</div>
+        <div class="stat__label">Input Backends</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Feature highlights ──────────────────────────────────── -->
+<section class="section" aria-labelledby="features-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">What it does</p>
+      <h2 class="section__title" id="features-title">Everything you need, nothing you don't</h2>
+      <p class="section__desc">
+        Build complex automation sequences with a drag-and-drop editor, conditional
+        triggers, reactive pixel watching, and multi-profile support.
+      </p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">⌨️</div>
+        <h3 class="card__title">Keyboard, Mouse &amp; Controller</h3>
+        <p class="card__body">Bind macros to any key, mouse button, or controller input across three input backends including XInput and DualShock.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🎯</div>
+        <h3 class="card__title">Pixel Color Match</h3>
+        <p class="card__body">Watch a pixel or area on screen for a specific color. Trigger a macro the instant it matches — perfect for game-state reactions.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">⚙️</div>
+        <h3 class="card__title">Powerful Action Editor</h3>
+        <p class="card__body">Chain key presses, mouse moves, delays, typed phrases, mouse-look, loops, and more. Reorder with drag-and-drop.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">📁</div>
+        <h3 class="card__title">Profiles</h3>
+        <p class="card__body">Create separate profiles for different games or tasks. Switch instantly with a hotkey or from the HUD overlay.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🖥️</div>
+        <h3 class="card__title">Customizable HUD</h3>
+        <p class="card__body">A floating, click-through overlay shows your active macros, profile, uptime, and more. Fully configurable — size, corner, opacity.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🪟</div>
+        <h3 class="card__title">Window Focus Lock</h3>
+        <p class="card__body">Restrict individual macros to only run when a specific window is in focus. Per-macro, per-profile — no global toggles needed.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <a href="features.html" class="btn btn-secondary">See all features →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── YouTube section ─────────────────────────────────────── -->
+<section class="section section--alt" aria-labelledby="videos-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">Watch</p>
+      <h2 class="section__title" id="videos-title">See it in action</h2>
+      <p class="section__desc">Video guides showing setup, features, and real-world use cases.</p>
+    </div>
+    <div class="yt-grid">
+
+      <!-- Video 1 -->
+      <a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_1" target="_blank" rel="noopener" class="yt-card" aria-label="Watch: Getting Started with Icarus Macro Maker on YouTube">
+        <div class="yt-card__thumb">
+          <!-- Replace with real thumbnail: img/yt-thumb-1.jpg -->
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a2a4a,#0d1117);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:3rem;opacity:0.4" aria-hidden="true">▶</span>
+          </div>
+          <div class="yt-card__play" aria-hidden="true">
+            <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#c4302b"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+          </div>
+        </div>
+        <div class="yt-card__info">
+          <div class="yt-card__label">YouTube Tutorial</div>
+          <div class="yt-card__title">Getting Started with Icarus Macro Maker</div>
+          <div class="yt-card__desc">Install, create your first macro, set a trigger condition, and get running in under 10 minutes.</div>
+        </div>
+      </a>
+
+      <!-- Video 2 -->
+      <a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_2" target="_blank" rel="noopener" class="yt-card" aria-label="Watch: Advanced Features Overview on YouTube">
+        <div class="yt-card__thumb">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a3a2a,#0d1117);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:3rem;opacity:0.4" aria-hidden="true">▶</span>
+          </div>
+          <div class="yt-card__play" aria-hidden="true">
+            <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#c4302b"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+          </div>
+        </div>
+        <div class="yt-card__info">
+          <div class="yt-card__label">YouTube Showcase</div>
+          <div class="yt-card__title">Advanced Features: Reactions, Profiles &amp; HUD</div>
+          <div class="yt-card__desc">Deep dive into pixel-based reactive macros, multi-profile switching, the HUD overlay, and controller support.</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Downloads ───────────────────────────────────────────── -->
+<section class="section" id="downloads" aria-labelledby="downloads-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">Download</p>
+      <h2 class="section__title" id="downloads-title">Get Icarus Macro Maker</h2>
+      <p class="section__desc">Free. No install required. Windows 10/11.</p>
+    </div>
+
+    <div class="alert alert--info" role="note">
+      <span aria-hidden="true">ℹ️</span>
+      <span>Requires <strong>Python 3.9+</strong> and the packages listed in <code>requirements.txt</code>.
+      See the <a href="guide.html">Quick Start Guide</a> for setup instructions.</span>
+    </div>
+
+    <div class="download-grid" style="margin-top:28px;">
+
+      <!-- Download 1 -->
+      <div class="dl-card">
+        <div class="dl-card__icon" aria-hidden="true">📦</div>
+        <div class="dl-card__name">Icarus Macro Maker v1.0</div>
+        <div class="dl-card__meta">
+          <span>ZIP archive</span>
+          <span>~placeholder MB</span>
+          <span>Windows</span>
+        </div>
+        <p class="dl-card__desc">
+          Full source release. Includes all runtime files, the default profile,
+          and a sample macro to get you started immediately.
+        </p>
+        <a href="releases/IcarusMacroMaker_v1.0.zip" class="btn btn-primary btn-sm" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download ZIP
+        </a>
+      </div>
+
+      <!-- Download 2 -->
+      <div class="dl-card">
+        <div class="dl-card__icon" aria-hidden="true">📄</div>
+        <div class="dl-card__name">Sample Macro Pack</div>
+        <div class="dl-card__meta">
+          <span>JSON</span>
+          <span>~placeholder KB</span>
+          <span>All versions</span>
+        </div>
+        <p class="dl-card__desc">
+          A collection of ready-to-import macros covering common use cases:
+          combat combos, utility shortcuts, pixel-reactive triggers, and more.
+        </p>
+        <a href="releases/IcarusMacroMaker_SampleMacros.json" class="btn btn-secondary btn-sm" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Sample Pack
+        </a>
+      </div>
+
+    </div>
+
+    <p class="text-muted mt-md" style="font-size:0.88rem;">
+      Looking for a specific version?
+      <a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker/releases" target="_blank" rel="noopener">Browse all releases on GitHub →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ── CTA / GitHub ─────────────────────────────────────────── -->
+<section class="section section--alt" aria-labelledby="github-cta-title">
+  <div class="container" style="text-align:center;">
+    <p class="section__eyebrow">Open Source</p>
+    <h2 class="section__title" id="github-cta-title">Built in the open</h2>
+    <p class="section__desc" style="margin-bottom:28px;">
+      Icarus Macro Maker is fully open source. Report bugs, request features,
+      or contribute directly on GitHub.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        Star on GitHub
+      </a>
+      <a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker/issues" target="_blank" rel="noopener" class="btn btn-outline">Report an Issue</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="nav__logo">
+        <div class="nav__logo-icon" aria-hidden="true">⚡</div>
+        Icarus Macro Maker
+      </div>
+      <p>A free, open-source macro automation tool for Windows. Built with Python and CustomTkinter.</p>
+    </div>
+    <div>
+      <div class="footer__col-title">Pages</div>
+      <ul class="footer__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="guide.html">Guide</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Download</div>
+      <ul class="footer__links">
+        <li><a href="releases/IcarusMacroMaker_v1.0.zip" download>v1.0 ZIP</a></li>
+        <li><a href="releases/IcarusMacroMaker_SampleMacros.json" download>Sample Macros</a></li>
+        <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker/releases" target="_blank" rel="noopener">All Releases</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Links</div>
+      <ul class="footer__links">
+        <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_1" target="_blank" rel="noopener">Tutorial Video</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_2" target="_blank" rel="noopener">Showcase Video</a></li>
+        <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker/issues" target="_blank" rel="noopener">Report a Bug</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2025 YOUR_NAME. Released under the MIT License.</span>
+    <span>Made with Python &amp; CustomTkinter</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

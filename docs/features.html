@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Full feature breakdown for Icarus Macro Maker – actions, conditions, profiles, HUD, and more." />
+  <title>Features – Icarus Macro Maker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon" aria-hidden="true">⚡</div>
+      Icarus Macro Maker
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="guide.html">Guide</a></li>
+      <li><a href="changelog.html">Changelog</a></li>
+      <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="index.html#downloads" class="nav__cta">Download</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="page-header" aria-labelledby="page-title">
+  <p class="section__eyebrow">Features</p>
+  <h1 class="page-header__title" id="page-title">Everything Icarus can do</h1>
+  <p class="page-header__desc">A full breakdown of every feature — from simple key presses to pixel-reactive automation.</p>
+</header>
+
+<section class="section" aria-labelledby="actions-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">Actions</p>
+      <h2 class="section__title" id="actions-title">9 action types</h2>
+      <p class="section__desc">Every step your macro can take, chained in any order with full drag-and-drop reordering.</p>
+    </div>
+    <div class="feature-list">
+
+      <div class="feature-block">
+        <div>
+          <div class="feature-block__icon" aria-hidden="true">⌨️</div>
+          <h3 class="feature-block__title">Key &amp; Mouse Input</h3>
+          <p class="feature-block__body">
+            Three input actions cover every scenario: <strong>Key Press</strong> (tap and release),
+            <strong>Key Down</strong> (hold), and <strong>Key Up</strong> (release). Works with
+            keyboard keys, mouse buttons, and controller buttons. Combine down/up pairs to hold
+            a key for exactly as long as you need.
+          </p>
+          <div class="feature-tag-list">
+            <span class="tag tag--accent">key_press</span>
+            <span class="tag tag--accent">key_down</span>
+            <span class="tag tag--accent">key_up</span>
+            <span class="tag tag--accent">mouse_click</span>
+          </div>
+        </div>
+        <div class="feature-block__panel">
+          <ul class="checklist">
+            <li>Full keyboard support including function keys and numpad</li>
+            <li>Mouse left, right, and middle click</li>
+            <li>XInput and DualShock controller buttons</li>
+            <li>Reassign any input after creation with Set Input</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block feature-block--flip">
+        <div>
+          <div class="feature-block__icon" aria-hidden="true">🖱️</div>
+          <h3 class="feature-block__title">Mouse Movement</h3>
+          <p class="feature-block__body">
+            Two dedicated mouse movement actions give you precise cursor control.
+            <strong>Move Mouse (Position)</strong> moves to an absolute screen coordinate — instant or
+            animated with humanization. <strong>Move Mouse (Location)</strong> simulates a relative
+            directional look movement, ideal for camera control in games.
+          </p>
+          <div class="feature-tag-list">
+            <span class="tag tag--accent">mouse_move</span>
+            <span class="tag tag--accent">mouse_look</span>
+          </div>
+        </div>
+        <div class="feature-block__panel">
+          <ul class="checklist">
+            <li>Multi-monitor support with per-display coordinates</li>
+            <li>Humanized curves with configurable path randomness</li>
+            <li>Speed variance and overshoot for natural movement</li>
+            <li>Instant mode for zero-delay repositioning</li>
+            <li>8-direction compass or freeform angle for mouse-look</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div>
+          <div class="feature-block__icon" aria-hidden="true">💬</div>
+          <h3 class="feature-block__title">Type Phrase</h3>
+          <p class="feature-block__body">
+            Type any string of text as simulated keystrokes. Choose from three speed presets
+            (Fastest, Balanced, Safest) or set a custom per-character delay. Instant mode
+            pastes the entire phrase in one OS call for scripts that need to bypass keystroke detection.
+          </p>
+        </div>
+        <div class="feature-block__panel">
+          <ul class="checklist">
+            <li>Supports all printable ASCII characters</li>
+            <li>Three speed presets: Fastest (1ms), Balanced (3ms), Safest (6ms)</li>
+            <li>Custom speed in milliseconds per character</li>
+            <li>Instant paste mode for speed-critical scenarios</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block feature-block--flip">
+        <div>
+          <div class="feature-block__icon" aria-hidden="true">⏱️</div>
+          <h3 class="feature-block__title">Delay &amp; Loop</h3>
+          <p class="feature-block__body">
+            Insert precise waits between actions. Use a fixed delay or enable random mode
+            to pick a duration between a min and max value — useful for bypassing anti-macro
+            detection. The Loop action replays the entire macro sequence continuously.
+          </p>
+        </div>
+        <div class="feature-block__panel">
+          <ul class="checklist">
+            <li>Fixed delays with ms precision</li>
+            <li>Random delay range (min/max) for human-like timing</li>
+            <li>Loop step repeats the entire macro indefinitely</li>
+            <li>Runtime duration display updates live in the editor</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</section>
+
+<section class="section section--alt" aria-labelledby="conditions-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">Conditions</p>
+      <h2 class="section__title" id="conditions-title">5 trigger conditions</h2>
+      <p class="section__desc">Control exactly when a macro fires. Stack multiple conditions and add OR groups for complex trigger logic.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🔄</div>
+        <h3 class="card__title">Always On</h3>
+        <p class="card__body">The macro runs continuously as long as it is enabled. No trigger needed — ideal for persistent background tasks.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">⬇️</div>
+        <h3 class="card__title">While Key Held</h3>
+        <p class="card__body">Fires repeatedly while a key is held down. Supports Repeat mode so the macro loops for as long as the key stays pressed.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🔀</div>
+        <h3 class="card__title">Toggle With Key</h3>
+        <p class="card__body">One key press turns the macro on; another turns it off. The macro remembers state between presses.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">▶️</div>
+        <h3 class="card__title">Action From Key</h3>
+        <p class="card__body">Executes once per key press. Optional safe mode prevents re-triggering while the macro is still running.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🎨</div>
+        <h3 class="card__title">Pixel Color Match</h3>
+        <p class="card__body">Watches a screen pixel or nearby radius area. Triggers the moment the color matches your target within a set tolerance. Supports all connected displays.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;">OR / Alt Condition Groups</h3>
+      <p style="color:var(--text-muted);font-size:0.95rem;max-width:640px;">
+        Add alternate condition groups so one macro can be triggered by completely independent scenarios.
+        The macro fires if the primary condition group <em>or</em> any alt group is satisfied — no need to duplicate macros.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="profiles-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">Profiles &amp; Organization</p>
+      <h2 class="section__title" id="profiles-title">Stay organized at scale</h2>
+    </div>
+    <div class="feature-block">
+      <div>
+        <div class="feature-block__icon" aria-hidden="true">📁</div>
+        <h3 class="feature-block__title">Profile System</h3>
+        <p class="feature-block__body">
+          Group macros into profiles for different games, applications, or contexts.
+          Switch the active profile with a global hotkey or from the HUD. Each profile
+          has its own enable/disable hotkey so you can arm or disarm an entire set instantly.
+        </p>
+        <ul class="checklist mt-md">
+          <li>Unlimited profiles, each saved as its own JSON file</li>
+          <li>Per-profile enable/disable hotkeys</li>
+          <li>Import and export individual macros between profiles</li>
+          <li>Rename, duplicate, and delete profiles from the UI</li>
+        </ul>
+      </div>
+      <div>
+        <div class="feature-block__icon" aria-hidden="true">🏷️</div>
+        <h3 class="feature-block__title">Macro Categories</h3>
+        <p class="feature-block__body">
+          Assign each macro to a category — Combat, Utility, Movement, Crafting, System,
+          or Uncategorized. Filter the macro list by category to find what you need quickly
+          even in large profiles.
+        </p>
+        <ul class="checklist mt-md">
+          <li>6 built-in categories</li>
+          <li>Per-macro toggle bind for instant enable/disable</li>
+          <li>Per-macro window focus lock</li>
+          <li>Run count display in the HUD</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="hud-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">HUD Overlay</p>
+      <h2 class="section__title" id="hud-title">Always-on-top information overlay</h2>
+      <p class="section__desc">A floating panel that stays on screen during use — fully configurable, click-through, and multi-monitor aware.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">📍</div>
+        <h3 class="card__title">Positioning</h3>
+        <p class="card__body">Snap to any corner of any connected display. Set a custom width, height, and opacity. Border toggle included.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🖱️</div>
+        <h3 class="card__title">Click-Through Mode</h3>
+        <p class="card__body">Enable click-through so the HUD never interferes with your game or application. Interactions pass straight through.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🔧</div>
+        <h3 class="card__title">Configurable Panels</h3>
+        <p class="card__body">Toggle individual panels: title bar, profile name, clock, uptime, macro summary, active macro list, pixel-watch status, and controller state.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">📊</div>
+        <h3 class="card__title">Run Counts</h3>
+        <p class="card__body">Optionally show how many times each macro has fired this session next to its name in the HUD list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="misc-title">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__eyebrow">More</p>
+      <h2 class="section__title" id="misc-title">Extra capabilities</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🎮</div>
+        <h3 class="card__title">Controller Support</h3>
+        <p class="card__body">Bind macros to XInput (Xbox-compatible) and DualShock controllers. The runtime monitors controller state alongside keyboard and mouse.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🪟</div>
+        <h3 class="card__title">Window Focus Lock</h3>
+        <p class="card__body">Per-macro window restriction. Assign a window title substring — the macro only fires while that window is in the foreground.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">🔭</div>
+        <h3 class="card__title">Pixel Watcher (Reactive)</h3>
+        <p class="card__body">Reactive macros live on their own page. A configurable poll interval (1–20 ms) keeps CPU usage low while staying responsive.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon" aria-hidden="true">💾</div>
+        <h3 class="card__title">Import / Export</h3>
+        <p class="card__body">Share macros as portable JSON files. Import a macro from any file on disk directly into your active profile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="nav__logo"><div class="nav__logo-icon" aria-hidden="true">⚡</div>Icarus Macro Maker</div>
+      <p>A free, open-source macro automation tool for Windows. Built with Python and CustomTkinter.</p>
+    </div>
+    <div>
+      <div class="footer__col-title">Pages</div>
+      <ul class="footer__links">
+        <li><a href="index.html">Home</a></li><li><a href="features.html">Features</a></li>
+        <li><a href="guide.html">Guide</a></li><li><a href="changelog.html">Changelog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Download</div>
+      <ul class="footer__links">
+        <li><a href="releases/IcarusMacroMaker_v1.0.zip" download>v1.0 ZIP</a></li>
+        <li><a href="releases/IcarusMacroMaker_SampleMacros.json" download>Sample Macros</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Links</div>
+      <ul class="footer__links">
+        <li><a href="https://github.com/YOUR_USERNAME/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_1" target="_blank" rel="noopener">Tutorial Video</a></li>
+        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_2" target="_blank" rel="noopener">Showcase Video</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2025 YOUR_NAME. Released under the MIT License.</span>
+    <span>Made with Python &amp; CustomTkinter</span>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

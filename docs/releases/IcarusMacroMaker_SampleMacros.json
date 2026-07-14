@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Sample – Press F1",
+    "enabled": true,
+    "category": "Utility",
+    "kind": "standard",
+    "conditions": [{"type": "action_from_key", "input_type": "keyboard", "key": "f1", "safe_mode": true}],
+    "alt_conditions": [],
+    "steps": [
+      {"step_type": "key_press", "params": {"input_type": "keyboard", "key": "f1"}},
+      {"step_type": "delay", "params": {"ms": 50}}
+    ],
+    "toggle_bind": null,
+    "focus_window": null
+  },
+  {
+    "name": "Sample – Spam Click",
+    "enabled": true,
+    "category": "Combat",
+    "kind": "standard",
+    "conditions": [{"type": "while_key_down", "input_type": "keyboard", "key": "f2", "mode": "repeat"}],
+    "alt_conditions": [],
+    "steps": [
+      {"step_type": "mouse_click", "params": {"key": "left"}},
+      {"step_type": "delay", "params": {"ms": 100}}
+    ],
+    "toggle_bind": null,
+    "focus_window": null
+  },
+  {
+    "name": "Sample – Type Greeting",
+    "enabled": true,
+    "category": "Utility",
+    "kind": "standard",
+    "conditions": [{"type": "action_from_key", "input_type": "keyboard", "key": "f3", "safe_mode": true}],
+    "alt_conditions": [],
+    "steps": [
+      {"step_type": "type_phrase", "params": {"text": "Hello! Welcome.", "speed_ms": 3, "instant": false}}
+    ],
+    "toggle_bind": null,
+    "focus_window": null
+  }
+]
