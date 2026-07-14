@@ -183,37 +183,39 @@
 
 <section class="section" aria-labelledby="tips-title">
   <div class="container">
-    <h2 class="section__title" id="tips-title" style="margin-bottom:24px;">Tips &amp; common questions</h2>
-    <div style="display:flex;flex-direction:column;gap:20px;max-width:720px;">
+    <h2 class="section__title" id="tips-title" style="margin-bottom:24px;">Tips &amp; Common Issues</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:720px;">
 
-      <div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">My macro fires too slowly — how do I speed it up?</h3>
-        <p class="text-muted" style="font-size:0.93rem;">Replace Delay steps with shorter values or remove them entirely. For Type Phrase, switch to the <em>Fastest</em> preset or enable <em>Instant</em> mode.</p>
+      <div class="card" style="display:flex;gap:18px;align-items:flex-start;padding:20px 22px;">
+        <div style="font-size:1.5rem;flex-shrink:0">⚠️</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Macros don't work</h3>
+          <p class="text-muted" style="font-size:0.93rem;">Try running <strong>IcarusMacroMaker.exe</strong> as Administrator. Right-click the exe → <em>Run as administrator</em>. Most input issues are caused by missing permissions.</p>
+        </div>
       </div>
 
-      <div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Can I run multiple macros at the same time?</h3>
-        <p class="text-muted" style="font-size:0.93rem;">Yes. All enabled macros in the active profile are monitored simultaneously. Their conditions are evaluated independently.</p>
+      <div class="card" style="display:flex;gap:18px;align-items:flex-start;padding:20px 22px;">
+        <div style="font-size:1.5rem;flex-shrink:0">📥</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">How do I import a macro?</h3>
+          <p class="text-muted" style="font-size:0.93rem;">On the Macros page click <strong>Import</strong>, paste the export code into the text box, then click <strong>Import</strong> again. The macro is added to your active profile instantly.</p>
+        </div>
       </div>
 
-      <div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">How do I import a macro someone shared with me?</h3>
-        <p class="text-muted" style="font-size:0.93rem;">On the Macros page, click <strong>Import Macro</strong> and select the <code>.json</code> file. It is added to your current profile immediately.</p>
+      <div class="card" style="display:flex;gap:18px;align-items:flex-start;padding:20px 22px;">
+        <div style="font-size:1.5rem;flex-shrink:0">🐛</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">I found a bug</h3>
+          <p class="text-muted" style="font-size:0.93rem;">Join the <a href="https://discord.gg/MumWTzUERU" target="_blank" rel="noopener">Discord</a> and post in the bug-reports channel. Include what you did, what happened, and any error messages you saw.</p>
+        </div>
       </div>
 
-      <div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">The pixel watcher is using a lot of CPU.</h3>
-        <p class="text-muted" style="font-size:0.93rem;">Increase the poll interval on the Reactions page. A value of 5–10 ms is a good balance between responsiveness and CPU cost.</p>
-      </div>
-
-      <div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Where are my macros and settings saved?</h3>
-        <p class="text-muted" style="font-size:0.93rem;">Everything is stored in <code>app/storage/</code> as JSON files. Back up that folder to preserve your profiles and macros.</p>
-      </div>
-
-      <div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Still stuck?</h3>
-        <p class="text-muted" style="font-size:0.93rem;">Join the <a href="https://discord.gg/MumWTzUERU" target="_blank" rel="noopener">Discord</a> for help, to report issues, or to chat with other users.</p>
+      <div class="card" style="display:flex;gap:18px;align-items:flex-start;padding:20px 22px;">
+        <div style="font-size:1.5rem;flex-shrink:0">💬</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;">Still need help?</h3>
+          <p class="text-muted" style="font-size:0.93rem;">The fastest way to get support is the <a href="https://discord.gg/MumWTzUERU" target="_blank" rel="noopener">Discord server</a>. The community and Icarus are active there daily.</p>
+        </div>
       </div>
 
     </div>
@@ -223,32 +225,12 @@
 <footer class="footer" role="contentinfo">
   <div class="footer__inner">
     <div class="footer__brand">
-      <div class="nav__logo"><div class="nav__logo-icon" aria-hidden="true">⚡</div>Icarus Macro Maker</div>
-      <p>A free, open-source macro automation tool for Windows. Built with Python and CustomTkinter.</p>
+      <div class="nav__logo"><div class="nav__logo-icon" aria-hidden="true"><svg class="logo-svg" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="5" fill="#4FC3F7"/><polygon points="18,4 20,11 16,11" fill="#4FC3F7"/><polygon points="29,7 25,13 22,10" fill="#4FC3F7"/><polygon points="32,18 25,16 25,20" fill="#4FC3F7"/><polygon points="29,29 22,26 25,23" fill="#4FC3F7"/><polygon points="18,32 16,25 20,25" fill="#4FC3F7"/><polygon points="7,29 11,23 14,26" fill="#4FC3F7"/><polygon points="4,18 11,20 11,16" fill="#4FC3F7"/><polygon points="7,7 14,10 11,13" fill="#4FC3F7"/></svg></div>Icarus Macro Maker</div>
+      <p>Free and open-source macro automation for Windows. Premium features available via Discord.</p>
     </div>
-    <div>
-      <div class="footer__col-title">Pages</div>
-      <ul class="footer__links">
-        <li><a href="index.html">Home</a></li><li><a href="features.html">Features</a></li>
-        <li><a href="guide.html">Guide</a></li><li><a href="changelog.html">Changelog</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer__col-title">Download</div>
-      <ul class="footer__links">
-        <li><a href="releases/IcarusMacroMaker_v1.0.zip" download>v1.0 ZIP</a></li>
-        <li><a href="releases/IcarusMacroMaker_SampleMacros.json" download>Sample Macros</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer__col-title">Links</div>
-      <ul class="footer__links">
-        <li><a href="https://github.com/Dxmpire/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://discord.gg/MumWTzUERU" target="_blank" rel="noopener">Discord</a></li>
-        <li><a href="https://www.youtube.com/@DomisIcarus" target="_blank" rel="noopener">IcarusSoftware - YouTube</a></li>
-        <li><a href="https://www.youtube.com/watch?v=PLACEHOLDER_VIDEO_2" target="_blank" rel="noopener">Showcase Video</a></li>
-      </ul>
-    </div>
+    <div><div class="footer__col-title">Pages</div><ul class="footer__links"><li><a href="index.html">Home</a></li><li><a href="features.html">Features</a></li><li><a href="macros.html">Macros</a></li><li><a href="guide.html">Guide</a></li><li><a href="changelog.html">Changelog</a></li></ul></div>
+    <div><div class="footer__col-title">Download</div><ul class="footer__links"><li><a href="https://github.com/Dxmpire/IcarusMacroMaker/releases" target="_blank" rel="noopener">Latest Release</a></li><li><a href="https://discord.gg/MumWTzUERU" target="_blank" rel="noopener">Premium Launcher</a></li></ul></div>
+    <div><div class="footer__col-title">Links</div><ul class="footer__links"><li><a href="https://github.com/Dxmpire/IcarusMacroMaker" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://discord.gg/MumWTzUERU" target="_blank" rel="noopener">Discord</a></li><li><a href="https://www.youtube.com/@DomisIcarus" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://github.com/Dxmpire/IcarusMacroMaker/issues" target="_blank" rel="noopener">Report a Bug</a></li></ul></div>
   </div>
   <div class="footer__bottom">
     <span>© 2025 Icarus. Released under the MIT License.</span>
