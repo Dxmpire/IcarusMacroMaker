@@ -241,6 +241,12 @@ ul { list-style: none; }
 }
 .btn-yt:hover { background: #e03025; transform: translateY(-1px); }
 
+.btn-discord {
+  background: #5865F2;
+  color: #fff;
+}
+.btn-discord:hover { background: #6f77f5; transform: translateY(-1px); }
+
 .btn-sm { padding: 8px 16px; font-size: 0.85rem; }
 
 .btn svg, .btn .icon { width: 18px; height: 18px; flex-shrink: 0; }
