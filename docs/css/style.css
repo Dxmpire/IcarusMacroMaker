@@ -134,33 +134,7 @@ ul { list-style: none; }
   text-decoration: none !important;
 }
 
-.nav__discord {
-  background: #5865F2;
-  color: #fff !important;
-  padding: 7px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.88rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: background var(--transition), transform var(--transition);
-}
 
-.nav__discord svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-}
-
-.nav__discord:hover {
-  background: #6f77f5 !important;
-  color: #fff !important;
-  text-decoration: none !important;
-  transform: translateY(-1px);
-}
-
-/* hamburger (mobile) */
 .nav__hamburger {
   display: none;
   flex-direction: column;
